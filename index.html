@@ -1,0 +1,324 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>CraftCV — Professional Resume Builder</title>
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Lora:ital,wght@0,400;0,500;0,600;0,700;1,400&family=Outfit:wght@300;400;500;600;700;800&family=Source+Code+Pro:wght@400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <div class="app-container">
+    <!-- Header -->
+    <header class="app-header">
+      <div class="logo-area">
+        <div class="logo-icon">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M14.5 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7.5L14.5 2z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/><line x1="10" y1="9" x2="8" y2="9"/></svg>
+        </div>
+        <div class="logo-text">
+          <h1>CraftCV</h1>
+          <span>Build Premium Resumes</span>
+        </div>
+      </div>
+      
+      <div class="global-actions">
+        <label for="import-json" class="btn btn-secondary tooltip" data-tooltip="Import data from a .json file">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" y1="3" x2="12" y2="15"/></svg>
+          Import JSON
+        </label>
+        <input type="file" id="import-json" accept=".json" style="display: none;">
+        
+        <button id="export-json" class="btn btn-secondary tooltip" data-tooltip="Download data as .json to edit later">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+          Export JSON
+        </button>
+        
+        <button id="reset-data" class="btn btn-danger tooltip" data-tooltip="Clear all data and start fresh">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="3 6 5 6 21 6"/><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"/><line x1="10" y1="11" x2="10" y2="17"/><line x1="14" y1="11" x2="14" y2="17"/></svg>
+          Reset
+        </button>
+        
+        <button id="print-pdf" class="btn btn-primary tooltip" data-tooltip="Print or save resume as PDF">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 6 2 18 2 18 9"/><path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"/><rect x="6" y="14" width="12" height="8"/></svg>
+          PDF / Print
+        </button>
+      </div>
+    </header>
+
+    <div class="workspace-layout">
+      <!-- Editor Sidebar -->
+      <aside class="editor-sidebar">
+        <!-- Navigation Tabs -->
+        <nav class="editor-tabs">
+          <button class="tab-btn active" data-tab="personal">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+            Personal
+          </button>
+          <button class="tab-btn" data-tab="experience">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="7" width="20" height="14" rx="2" ry="2"/><path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"/></svg>
+            Experience
+          </button>
+          <button class="tab-btn" data-tab="education">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 10v6M2 10l10-5 10 5-10 5z"/><path d="M6 12v5c0 2 2 3 6 3s6-1 6-3v-5"/></svg>
+            Education
+          </button>
+          <button class="tab-btn" data-tab="projects">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="12 2 2 7 12 12 22 7 12 2"/><polyline points="2 17 12 22 22 17"/><polyline points="2 12 12 17 22 12"/></svg>
+            Projects
+          </button>
+          <button class="tab-btn" data-tab="skills">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="m9.09 9 5.36 5.36"/><circle cx="9" cy="9" r="1"/></svg>
+            Skills
+          </button>
+          <button class="tab-btn" data-tab="design">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22C17.5228 22 22 17.5228 22 12C22 6.47715 17.5228 2 12 2C6.47715 2 2 6.47715 2 12C2 14.7255 3.09032 17.1962 4.85857 19C5.03449 19.176 5.09935 19.4313 5.02325 19.6784L4.76451 20.5192C4.64019 20.9233 4.96677 21.3148 5.3839 21.2552L6.37765 21.1133C6.61907 21.0788 6.86338 21.1718 7.02271 21.3539C8.42398 21.9542 9.9723 22 12 22Z"/><circle cx="7.5" cy="10.5" r="1.5"/><circle cx="11.5" cy="7.5" r="1.5"/><circle cx="16.5" cy="9.5" r="1.5"/><circle cx="15.5" cy="14.5" r="1.5"/></svg>
+            Design
+          </button>
+        </nav>
+
+        <!-- Form Panels Container -->
+        <div class="form-container">
+          
+          <!-- Personal Info Panel -->
+          <div class="form-panel active" id="panel-personal">
+            <div class="panel-header">
+              <h2>Personal Details</h2>
+              <p>Add your contact details, profile photo, and elevator pitch.</p>
+            </div>
+            
+            <div class="grid-2">
+              <div class="form-group">
+                <label for="input-fullname">Full Name</label>
+                <input type="text" id="input-fullname" placeholder="John Doe">
+              </div>
+              <div class="form-group">
+                <label for="input-jobtitle">Professional Title</label>
+                <input type="text" id="input-jobtitle" placeholder="Senior Software Engineer">
+              </div>
+            </div>
+
+            <div class="grid-2">
+              <div class="form-group">
+                <label for="input-email">Email Address</label>
+                <input type="email" id="input-email" placeholder="john.doe@example.com">
+              </div>
+              <div class="form-group">
+                <label for="input-phone">Phone Number</label>
+                <input type="tel" id="input-phone" placeholder="+1 (555) 000-0000">
+              </div>
+            </div>
+
+            <div class="grid-2">
+              <div class="form-group">
+                <label for="input-location">Location</label>
+                <input type="text" id="input-location" placeholder="New York, NY">
+              </div>
+              <div class="form-group">
+                <label for="input-website">Website / Portfolio</label>
+                <input type="url" id="input-website" placeholder="https://johndoe.dev">
+              </div>
+            </div>
+
+            <div class="grid-2">
+              <div class="form-group">
+                <label for="input-linkedin">LinkedIn Username</label>
+                <input type="text" id="input-linkedin" placeholder="johndoe">
+              </div>
+              <div class="form-group">
+                <label for="input-github">GitHub Username</label>
+                <input type="text" id="input-github" placeholder="johndoe">
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label for="input-photo">Profile Image URL (Optional)</label>
+              <input type="url" id="input-photo" placeholder="https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&q=80&w=200&h=200">
+            </div>
+
+            <div class="form-group">
+              <label for="input-summary">Professional Summary</label>
+              <textarea id="input-summary" rows="5" placeholder="A brief overview of your skills, experiences, and goals..."></textarea>
+            </div>
+          </div>
+
+          <!-- Work Experience Panel -->
+          <div class="form-panel" id="panel-experience">
+            <div class="panel-header">
+              <h2>Work Experience</h2>
+              <p>Add details about your current and past employment roles.</p>
+            </div>
+            
+            <div id="experience-list" class="dynamic-list"></div>
+            
+            <button id="add-experience" class="btn btn-secondary btn-full">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+              Add Work Experience
+            </button>
+          </div>
+
+          <!-- Education Panel -->
+          <div class="form-panel" id="panel-education">
+            <div class="panel-header">
+              <h2>Education</h2>
+              <p>Add your degrees, certifications, and academic history.</p>
+            </div>
+            
+            <div id="education-list" class="dynamic-list"></div>
+            
+            <button id="add-education" class="btn btn-secondary btn-full">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+              Add Education
+            </button>
+          </div>
+
+          <!-- Projects Panel -->
+          <div class="form-panel" id="panel-projects">
+            <div class="panel-header">
+              <h2>Projects</h2>
+              <p>Highlight your personal, open source, or freelance projects.</p>
+            </div>
+            
+            <div id="project-list" class="dynamic-list"></div>
+            
+            <button id="add-project" class="btn btn-secondary btn-full">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+              Add Project
+            </button>
+          </div>
+
+          <!-- Skills Panel -->
+          <div class="form-panel" id="panel-skills">
+            <div class="panel-header">
+              <h2>Skills & Competencies</h2>
+              <p>List your technical skills, tools, and domain expertise.</p>
+            </div>
+            
+            <div id="skill-list" class="dynamic-list"></div>
+            
+            <button id="add-skill-group" class="btn btn-secondary btn-full">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+              Add Skill Category
+            </button>
+          </div>
+
+          <!-- Design Panel -->
+          <div class="form-panel" id="panel-design">
+            <div class="panel-header">
+              <h2>Design Customization</h2>
+              <p>Configure templates, color schemes, spacing, and typography.</p>
+            </div>
+            
+            <div class="form-group">
+              <label for="select-template">Resume Template</label>
+              <div class="select-wrapper">
+                <select id="select-template">
+                  <option value="modern" selected>Modern (Header Grid, Visual Accent)</option>
+                  <option value="classic">Classic (Centered Header, Double Lines)</option>
+                  <option value="minimal">Minimalist (Sleek Sidebar, High White-space)</option>
+                </select>
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label>Theme Primary Color</label>
+              <div class="color-picker-grid">
+                <button class="color-preset active" data-color="#2563eb" style="background-color: #2563eb;"></button>
+                <button class="color-preset" data-color="#0f766e" style="background-color: #0f766e;"></button>
+                <button class="color-preset" data-color="#1e1b4b" style="background-color: #1e1b4b;"></button>
+                <button class="color-preset" data-color="#701a75" style="background-color: #701a75;"></button>
+                <button class="color-preset" data-color="#be123c" style="background-color: #be123c;"></button>
+                <button class="color-preset" data-color="#4d7c0f" style="background-color: #4d7c0f;"></button>
+                <button class="color-preset" data-color="#1e293b" style="background-color: #1e293b;"></button>
+                <div class="color-picker-wrapper">
+                  <input type="color" id="custom-color-picker" value="#2563eb">
+                  <label for="custom-color-picker">Custom</label>
+                </div>
+              </div>
+            </div>
+
+            <div class="grid-2">
+              <div class="form-group">
+                <label for="select-font">Typography</label>
+                <div class="select-wrapper">
+                  <select id="select-font">
+                    <option value="Outfit, sans-serif" selected>Outfit (Modern)</option>
+                    <option value="Inter, sans-serif">Inter (Clean Pro)</option>
+                    <option value="Lora, serif">Lora (Elegant Serif)</option>
+                    <option value="Source Code Pro, monospace">Code (Technical)</option>
+                  </select>
+                </div>
+              </div>
+              <div class="form-group">
+                <label for="select-fontsize">Base Font Size</label>
+                <div class="select-wrapper">
+                  <select id="select-fontsize">
+                    <option value="12px">Extra Small</option>
+                    <option value="14px" selected>Small (Standard)</option>
+                    <option value="16px">Medium</option>
+                    <option value="18px">Large</option>
+                  </select>
+                </div>
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label for="range-spacing">Section Spacing</label>
+              <div class="range-wrapper">
+                <input type="range" id="range-spacing" min="0.4" max="1.5" step="0.1" value="0.8">
+                <span id="spacing-value">Normal</span>
+              </div>
+            </div>
+            
+            <div class="form-group">
+              <label>Layout Preferences</label>
+              <div class="checkbox-group">
+                <label class="checkbox-container">
+                  <input type="checkbox" id="check-show-photo" checked>
+                  <span class="checkmark"></span>
+                  Show Profile Image
+                </label>
+                <label class="checkbox-container">
+                  <input type="checkbox" id="check-uppercase-headers" checked>
+                  <span class="checkmark"></span>
+                  Uppercase Section Headers
+                </label>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </aside>
+
+      <!-- Live Preview Area -->
+      <main class="preview-area">
+        <div class="preview-header-control">
+          <div class="preview-status">
+            <span class="indicator live"></span>
+            <span>Live Preview</span>
+          </div>
+          <div class="preview-zoom">
+            <button id="zoom-out" class="zoom-btn" title="Zoom Out">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="5" y1="12" x2="19" y2="12"/></svg>
+            </button>
+            <span id="zoom-factor">100%</span>
+            <button id="zoom-in" class="zoom-btn" title="Zoom In">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+            </button>
+          </div>
+        </div>
+
+        <div class="preview-viewport">
+          <div class="resume-paper" id="resume-document">
+            <!-- Dynamic Content Injected Here -->
+          </div>
+        </div>
+      </main>
+    </div>
+  </div>
+  
+  <script src="app.js"></script>
+</body>
+</html>
